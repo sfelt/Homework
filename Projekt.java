@@ -3,13 +3,20 @@ package Homework;
 import static java.util.Comparator.comparing;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Sigrid Felt IA 18
+ *
+ */
 public class Projekt {
+	
 
 	public static Kasutaja kasutaja;// seaded objekt on nähtav terves selles klassis
 	public static Edetabel edetabel;
 
 	public static void main(String[] args) {
-
+		
+		System.out.println("Peastarvutamise programm. Autor: Sigrid Felt, IA18");
 		System.out.println("Sisesta oma nimi");
 		String kasutajaNimi = TextIO.getlnString();
 		kasutajaNimi = kasutajaNimi.substring(0, 1).toUpperCase() + kasutajaNimi.substring(1);
@@ -101,30 +108,39 @@ public class Projekt {
 			String tehe = "+";
 
 			// teha kaks muutujat, mille väärtuseks on juhuslikud arvud
-			int juhuslikArvYks = juhuslikarv(kasutaja.minArv, kasutaja.maxArv);
-			int juhuslikArvKaks = juhuslikarv(kasutaja.minArv, kasutaja.maxArv);
+			int juhuslikArvYks = 0; 
+			int juhuslikArvKaks = 0; 
 
 			// teha nende muutujatega tehteid
 			switch (tehteMark) {
 			case 1: // liitmine
+				juhuslikArvYks = juhuslikarv(kasutaja.minArv * kasutaja.liitmiseKordaja, kasutaja.maxArv * kasutaja.liitmiseKordaja);
+				juhuslikArvKaks = juhuslikarv(kasutaja.minArv * kasutaja.liitmiseKordaja, kasutaja.maxArv * kasutaja.liitmiseKordaja);
 				tegelikTulemus = juhuslikArvYks + juhuslikArvKaks;
+				tehe = "+";
 				break;
 			case 2: // lahutamine
+				juhuslikArvYks =  juhuslikarv(kasutaja.minArv * kasutaja.lahutamiseKordaja, kasutaja.maxArv * kasutaja.lahutamiseKordaja);
+				juhuslikArvKaks = juhuslikarv(kasutaja.minArv * kasutaja.lahutamiseKordaja, kasutaja.maxArv * kasutaja.lahutamiseKordaja);
 				tegelikTulemus = juhuslikArvYks - juhuslikArvKaks;
 				tehe = "-";
 				break;
 			case 3: // korrutamine
+				juhuslikArvYks = juhuslikarv(kasutaja.minArv * kasutaja.korrutamiseKordaja, kasutaja.maxArv * kasutaja.korrutamiseKordaja);
+				juhuslikArvKaks = juhuslikarv(kasutaja.minArv * kasutaja.korrutamiseKordaja, kasutaja.maxArv * kasutaja.korrutamiseKordaja);
 				tegelikTulemus = juhuslikArvYks * juhuslikArvKaks;
 				tehe = "*";
 				break;
 			case 4: // jagamine
-
+				juhuslikArvYks = juhuslikarv(kasutaja.minArv * kasutaja.jagamiseKordaja, kasutaja.maxArv * kasutaja.jagamiseKordaja);
+				juhuslikArvKaks = juhuslikarv(kasutaja.minArv * kasutaja.jagamiseKordaja, kasutaja.maxArv * kasutaja.jagamiseKordaja);
+				
 				tegelikTulemus = juhuslikArvYks / juhuslikArvKaks;
 
 				while (juhuslikArvYks % juhuslikArvKaks != 0) { // kontrollib
 																// kas jääk on 0
-					juhuslikArvYks = juhuslikarv(kasutaja.minArv, kasutaja.maxArv);
-					juhuslikArvKaks = juhuslikarv(kasutaja.minArv, kasutaja.maxArv);
+					juhuslikArvYks = juhuslikarv(kasutaja.minArv * kasutaja.jagamiseKordaja, kasutaja.maxArv * kasutaja.jagamiseKordaja);
+					juhuslikArvKaks = juhuslikarv(kasutaja.minArv * kasutaja.jagamiseKordaja, kasutaja.maxArv * kasutaja.jagamiseKordaja);
 					tegelikTulemus = juhuslikArvYks / juhuslikArvKaks;
 				}
 

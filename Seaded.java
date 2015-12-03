@@ -8,9 +8,14 @@ import java.io.ObjectOutputStream;
 public class Seaded {
 	public int minArv;
 	public int maxArv;
-	public int maxManguKestvus;
-	public int maxKorrutis;
 
+	public int maxManguKestvus;
+
+	public int liitmiseKordaja = 5;
+	public int lahutamiseKordaja = 4;
+	public int korrutamiseKordaja = 3;
+	public int jagamiseKordaja = 2;
+	
 	public void salvestaSeaded() { // tuleb kindlasti mängu lõpus välja kutsuda
 		// objekti serialiseerimine ja salvestamine
 		try {
@@ -25,10 +30,13 @@ public class Seaded {
 	
 	// konstruktoris algväärtustatakse seaded vaikeväärtustega, ei ole avalikuks kasutamiseks
 	private Seaded() {
-		minArv = 1;
+		minArv = 2;
 		maxArv = 20;
-		maxKorrutis = 100;
-		maxManguKestvus = 60;
+		liitmiseKordaja = 5;
+		lahutamiseKordaja = 4;
+		korrutamiseKordaja = 3;
+		jagamiseKordaja = 2;
+		maxManguKestvus = 60;		
 		}
 
 	public static Seaded taastaSeaded() { // kasutatakse seadete objekti loomiseks

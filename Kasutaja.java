@@ -11,11 +11,19 @@ public class Kasutaja implements java.io.Serializable {
 	public int minArv;
 	public int maxArv;
 	public int maxManguKestvus;
+	public int liitmiseKordaja = 5;
+	public int lahutamiseKordaja = 4;
+	public int korrutamiseKordaja = 3;
+	public int jagamiseKordaja = 2;
 
 	private Kasutaja() {
 		minArv = 1;
 		maxArv = 20;
 		maxManguKestvus = 60;
+		liitmiseKordaja = 5;
+		lahutamiseKordaja = 4;
+		korrutamiseKordaja = 3;
+		jagamiseKordaja = 2;
 	}
 
 	// kasutatakse seadete objekti loomiseks
