@@ -33,6 +33,7 @@ public class Kasutaja implements java.io.Serializable {
 			if (obj instanceof Kasutaja) {
 				kasutaja = (Kasutaja) obj;
 			}
+			obj_in.close();
 
 		} catch (Exception ex) {
 			kasutaja = new Kasutaja();

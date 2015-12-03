@@ -1,13 +1,12 @@
 package Homework;
 
-import java.io.IOException;
-import java.util.Random;
-
-import praktikum3.TextIO;
+import static java.util.Comparator.comparing;
+import java.util.Collections;
 
 public class Projekt {
 
 	public static Kasutaja kasutaja;// seaded objekt on nähtav terves selles klassis
+	public static Edetabel edetabel;
 
 	public static void main(String[] args) {
 
@@ -16,6 +15,7 @@ public class Projekt {
 		kasutajaNimi = kasutajaNimi.substring(0, 1).toUpperCase() + kasutajaNimi.substring(1);
 		System.out.format("Tere, %s\n", kasutajaNimi);
 		kasutaja = Kasutaja.taastaKasutaja(kasutajaNimi);
+		edetabel = Edetabel.taastaEdetabel();
 		while (true) {
 			System.out.println("Tee valik:  1. Lähme mängima; 2. Kuva edetabel 3. Välju");
 			int sisestus = TextIO.getInt();
@@ -36,6 +36,7 @@ public class Projekt {
 		}
 
 		kasutaja.salvestaKasutaja();
+		edetabel.salvestaEdetabel();
 
 		// TODO: kuvada statistika
 
@@ -70,15 +71,26 @@ public class Projekt {
 	}
 
 	public static void edetabeliKuvamine() {
-		
+		if (!edetabel.tulemused.isEmpty()) {
 
-		// TODO: edetabeli kuvamine
+			// Sorteerime tulemuste järgi kasvavas järjekorras
+			Collections.sort(edetabel.tulemused, comparing(Tulemus::getPunktiSumma));
+			Collections.reverse(edetabel.tulemused);
+			
+			// foreach tsükkel 
+			for (Tulemus tulemus : edetabel.tulemused) {
+				System.out.println(tulemus.toString());
+			}
+
+		}
 	}
 
 	public static void arvutamine() {
 		int teheteArv = 0;
 		int oigedVastused = 0;
 		long startTime = System.currentTimeMillis();
+		
+		Tulemus tulemus = new Tulemus(kasutaja.kasutajaNimi) ;
 
 		while ((System.currentTimeMillis() - startTime) < (kasutaja.maxManguKestvus * 1000)) { // lõpetab mängu etteantud ajal 
 
@@ -136,7 +148,9 @@ public class Projekt {
 					(startTime - System.currentTimeMillis()) / 1000 + kasutaja.maxManguKestvus);
 
 		} // while tsükli lõpp
-
+		tulemus.punktiSumma = (oigedVastused * 1000) - ((teheteArv - oigedVastused) * 100);
+		edetabel.tulemused.add(tulemus);
+	
 	}
 
 	public static int juhuslikarv(int min, int max) {
