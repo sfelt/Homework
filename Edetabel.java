@@ -6,6 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Sigrid
+ *
+ */
 public class Edetabel implements java.io.Serializable {
 	public ArrayList<Tulemus> tulemused;
 
@@ -16,7 +21,10 @@ public class Edetabel implements java.io.Serializable {
 	public void kustutaTulemused() {
 		tulemused = new ArrayList<>();
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static Edetabel taastaEdetabel() {
 		Edetabel edetabel = null;
 		try {
@@ -37,6 +45,9 @@ public class Edetabel implements java.io.Serializable {
 		}
 		return edetabel;
 	}
+	/**
+	 * 
+	 */
 
 	// tuleb kindlasti mängu lõpus välja kutsuda objekti serialiseerimine ja
 	// salvestamine

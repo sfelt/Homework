@@ -5,6 +5,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * 
+ * @author Sigrid
+ *
+ */
 public class Kasutaja implements java.io.Serializable {
 
 	public String kasutajaNimi;
@@ -26,6 +31,11 @@ public class Kasutaja implements java.io.Serializable {
 		jagamiseKordaja = 2;
 	}
 
+	/**
+	 * 
+	 * @param kasutajaNimi
+	 * @return
+	 */
 	// kasutatakse seadete objekti loomiseks
 	public static Kasutaja taastaKasutaja(String kasutajaNimi) {
 
@@ -52,6 +62,9 @@ public class Kasutaja implements java.io.Serializable {
 	}
 
 	// tuleb kindlasti mängu lõpus välja kutsuda objekti serialiseerimine ja salvestamine
+	/**
+	 * 
+	 */
 	public void salvestaKasutaja() { 
 		try {
 			String failiNimi = kasutajaNimi + ".data";

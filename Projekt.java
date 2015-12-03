@@ -45,7 +45,9 @@ public class Projekt {
 		kasutaja.salvestaKasutaja();
 		edetabel.salvestaEdetabel();
 	}
-
+/**
+ * 
+ */
 	public static void seadistamine() {
 
 		while (true) {
@@ -76,7 +78,9 @@ public class Projekt {
 			}
 		}
 	}
-
+/**
+ * 
+ */
 	public static void edetabeliKuvamine() {
 		if (!edetabel.tulemused.isEmpty()) {
 
@@ -93,7 +97,9 @@ public class Projekt {
 
 		}
 	}
-
+/**
+ * 
+ */
 	public static void arvutamine() {
 		int teheteArv = 0;
 		int oigedVastused = 0;
@@ -171,6 +177,12 @@ public class Projekt {
 
 		edetabeliKuvamine();	
 	}
+	/**
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 
 	public static int juhuslikarv(int min, int max) {
 		int arv = max - min + 1;

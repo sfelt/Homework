@@ -3,6 +3,11 @@ package Homework;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 
+ * @author Sigrid
+ *
+ */
 public class Tulemus implements java.io.Serializable {
 	
 	public LocalDateTime aeg;
@@ -13,6 +18,9 @@ public class Tulemus implements java.io.Serializable {
 		return punktiSumma;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
 		
