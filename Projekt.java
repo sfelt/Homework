@@ -37,19 +37,16 @@ public class Projekt {
 
 		kasutaja.salvestaKasutaja();
 		edetabel.salvestaEdetabel();
-
-		// TODO: kuvada statistika
-
 	}
 
 	public static void seadistamine() {
 
 		while (true) {
 			System.out.println(
-					"Tee valik, millist seadet soovid muuta. \n1. Saad muuta minimaalse arvu väärtust; \n2. Saad muuta maksimaalse arvu "
-							+ "väärtust; \n3. Saad muuta mängu kestvust; \n4. Läheb seadetest välja \n");
+					"Tee valik, millist seadet soovid muuta: \n1. Saad muuta minimaalse arvu väärtust; \n2. Saad muuta maksimaalse arvu "
+							+ "väärtust; \n3. Saad muuta mängu kestvust; \n4. Saad kustutada tulemused edetabelist; \n5. Läheb seadetest välja \n");
 			int kasutajaSisestus = TextIO.getInt();
-			if (kasutajaSisestus == 4) {
+			if (kasutajaSisestus == 5) {
 				break;
 			}
 			switch (kasutajaSisestus) {
@@ -66,6 +63,9 @@ public class Projekt {
 						kasutaja.maxManguKestvus);
 				kasutaja.maxManguKestvus = TextIO.getInt();
 				break;
+			case 4: 
+			edetabel.kustutaTulemused();
+			break;
 			}
 		}
 	}
@@ -78,8 +78,10 @@ public class Projekt {
 			Collections.reverse(edetabel.tulemused);
 			
 			// foreach tsükkel 
+			int reaArv = 1;
 			for (Tulemus tulemus : edetabel.tulemused) {
-				System.out.println(tulemus.toString());
+				System.out.println(reaArv + ". " + tulemus.toString());
+				reaArv++;
 			}
 
 		}
@@ -150,7 +152,8 @@ public class Projekt {
 		} // while tsükli lõpp
 		tulemus.punktiSumma = (oigedVastused * 1000) - ((teheteArv - oigedVastused) * 100);
 		edetabel.tulemused.add(tulemus);
-	
+
+		edetabeliKuvamine();	
 	}
 
 	public static int juhuslikarv(int min, int max) {
@@ -158,5 +161,4 @@ public class Projekt {
 		int tulemusYks = (int) (Math.random() * arv + min);
 		return tulemusYks;
 	}
-
 }

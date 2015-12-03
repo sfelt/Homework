@@ -3,7 +3,7 @@ package Homework;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Tulemus {
+public class Tulemus implements java.io.Serializable {
 	
 	public LocalDateTime aeg;
 	public int punktiSumma;

@@ -6,10 +6,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Edetabel {
+public class Edetabel implements java.io.Serializable {
 	public ArrayList<Tulemus> tulemused;
 
 	private Edetabel() {
+		tulemused = new ArrayList<>();
+	}
+
+	public void kustutaTulemused() {
 		tulemused = new ArrayList<>();
 	}
 
