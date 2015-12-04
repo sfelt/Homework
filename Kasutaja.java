@@ -6,21 +6,34 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
+ * Kasutaja andmete ja seadistuste hoidmiseks.
+ * Salvestatakse programmist lahkumisel, taastatakse mängu alustamuisel.
  * 
  * @author Sigrid
  *
  */
 public class Kasutaja implements java.io.Serializable {
 
+	/** Kasutajanime hoimidmiseks */
 	public String kasutajaNimi;
+	/** Juhuslikuarvu alumine piir */
 	public int minArv;
+	/** Juhuslikuarvu ülemine piir */
 	public int maxArv;
+	/** Mängu kestvus sekundites, vaikimisi 60 sek. */
 	public int maxManguKestvus;
+	/** Nihutab piire liitmisel */
 	public int liitmiseKordaja = 5;
+	/** Nihutab piire lahutamisel */
 	public int lahutamiseKordaja = 4;
+	/** Nihutab piire korrutamisel */
 	public int korrutamiseKordaja = 3;
+	/** Nihutab piire jagamisel */
 	public int jagamiseKordaja = 2;
 
+	/** Konstruktor on peidetud selleks, et kasutaja andmete 
+	 * taastamine või algväärtustamine oleks ühe meetodiga tehtav.
+	 */
 	private Kasutaja() {
 		minArv = 1;
 		maxArv = 20;
@@ -33,48 +46,60 @@ public class Kasutaja implements java.io.Serializable {
 
 	/**
 	 * 
-	 * @param kasutajaNimi
-	 * @return
+	 * @param kasutajaNimi - kasutaja poolt mängu alguses sisestatav nimi
+	 * @return tagastab kasutaja objekti
 	 */
-	// kasutatakse seadete objekti loomiseks
 	public static Kasutaja taastaKasutaja(String kasutajaNimi) {
 
 		Kasutaja kasutaja = null;
 
+		/** Proovime failist kasutaja andmeid sisse lugeda */
 		try {
-			String failiNimi = kasutajaNimi + ".data";
-			FileInputStream f_in = new FileInputStream(failiNimi);
+			String failiNimi = kasutajaNimi + ".data"; // kettal oleva faili nimi
+			FileInputStream loebBaididFailist = new FileInputStream(failiNimi); // avab faili lugemiseks
+			ObjectInputStream loebBaididObjektiks = new ObjectInputStream(loebBaididFailist);
 
-			ObjectInputStream obj_in = new ObjectInputStream(f_in);
+			// loetakse baidid failist ja moodustatakse objekt
+			Object obj = loebBaididObjektiks.readObject();
 
-			Object obj = obj_in.readObject();
+			// kas objekt kuulub Kasutaja klassi?
 			if (obj instanceof Kasutaja) {
 				kasutaja = (Kasutaja) obj;
 			}
-			obj_in.close();
+			// sulegda voog
+			loebBaididObjektiks.close();
 
+		// kui tekib (ükskõik mis) viga, siis tehakse uus kasutaja vaikeseadetega			
 		} catch (Exception ex) {
-			kasutaja = new Kasutaja();
+			kasutaja = new Kasutaja(); // peidetud konstruktori kasutamine
 			kasutaja.kasutajaNimi = kasutajaNimi;
 		}
 
+		// tagastab kasutaja, kas taastatud või vaikeseadetegea uus 
 		return kasutaja;
 	}
 
-	// tuleb kindlasti mängu lõpus välja kutsuda objekti serialiseerimine ja salvestamine
 	/**
-	 * 
+	 * Serialiserib ja salvestab kasutaja seaded kasutajanimelisse faili
 	 */
 	public void salvestaKasutaja() { 
+
+		/* Proovime kasutaja andmeid salvestada faili */		
 		try {
 			String failiNimi = kasutajaNimi + ".data";
-			FileOutputStream f_out = new FileOutputStream(failiNimi);
-			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-			obj_out.writeObject(this);
-			obj_out.close();
+
+			/* avab ühenduse failiga */
+			FileOutputStream kirjutabBaididFaili = new FileOutputStream(failiNimi);
+			
+			/* avab ühenduse objektiga ja ühendub failiühendusega */
+			ObjectOutputStream kirjutabObjektiBaitideks = new ObjectOutputStream(kirjutabBaididFaili);
+			/* salvestab objekti failiks */
+			kirjutabObjektiBaitideks.writeObject(this);
+			/* sulgeb ühenduse */
+			kirjutabObjektiBaitideks.close();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			ex.printStackTrace(); /* trükib välja veateate */
 		}
 	}
-
 }
+
